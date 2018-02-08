@@ -91,10 +91,13 @@ public abstract class ImageWorker {
                 listener.onImageLoaded(true);
             }
         } else if (cancelPotentialWork(data, imageView)) {
-            //BEGIN_INCLUDE(execute_background_task)
+
+            /**
+             * BEGIN_INCLUDE(execute_background_task)
+             * 此处做了一步操作就是把Task缓存一份到Drawable中，为了下次利用这个Drawable对象时继续使用缓存的Task，防止AsyncTask new太多
+             */
             final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, listener);
-            final AsyncDrawable asyncDrawable =
-                    new AsyncDrawable(mResources, mLoadingBitmap, task);
+            final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mLoadingBitmap, task);
             imageView.setImageDrawable(asyncDrawable);
 
             // NOTE: This uses a custom version of AsyncTask that has been pulled from the
