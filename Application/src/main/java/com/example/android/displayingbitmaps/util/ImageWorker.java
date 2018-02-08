@@ -302,8 +302,7 @@ public abstract class ImageWorker {
             // thread and the ImageView that was originally bound to this task is still bound back
             // to this task and our "exit early" flag is not set then try and fetch the bitmap from
             // the cache
-            if (mImageCache != null && !isCancelled() && getAttachedImageView() != null
-                    && !mExitTasksEarly) {
+            if (mImageCache != null && !isCancelled() && getAttachedImageView() != null && !mExitTasksEarly) {
                 bitmap = mImageCache.getBitmapFromDiskCache(dataString);
             }
 
@@ -311,8 +310,7 @@ public abstract class ImageWorker {
             // another thread and the ImageView that was originally bound to this task is still
             // bound back to this task and our "exit early" flag is not set, then call the main
             // process method (as implemented by a subclass)
-            if (bitmap == null && !isCancelled() && getAttachedImageView() != null
-                    && !mExitTasksEarly) {
+            if (bitmap == null && !isCancelled() && getAttachedImageView() != null && !mExitTasksEarly) {
                 bitmap = processBitmap(mData);
             }
 
@@ -438,11 +436,7 @@ public abstract class ImageWorker {
     private void setImageDrawable(ImageView imageView, Drawable drawable) {
         if (mFadeInBitmap) {
             // Transition drawable with a transparent drawable and the final drawable
-            final TransitionDrawable td =
-                    new TransitionDrawable(new Drawable[] {
-                            new ColorDrawable(android.R.color.transparent),
-                            drawable
-                    });
+            final TransitionDrawable td = new TransitionDrawable(new Drawable[] {new ColorDrawable(android.R.color.transparent), drawable});
             // Set background to loading bitmap
             imageView.setBackgroundDrawable(
                     new BitmapDrawable(mResources, mLoadingBitmap));
