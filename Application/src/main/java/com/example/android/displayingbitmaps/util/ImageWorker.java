@@ -320,6 +320,8 @@ public abstract class ImageWorker {
             // bitmap to the cache for future use. Note we don't check if the task was cancelled
             // here, if it was, and the thread is still running, we may as well add the processed
             // bitmap to our cache as it might be used again in the future
+
+            //如果这个地方不判断hasHoneycomb()而是直接用RecyclingBitmapDrawable的话，应该会更省内存，但是滑出屏幕的ImageView马上回被回收掉，所以为了体验，适当占用内存啦
             if (bitmap != null) {
                 if (Utils.hasHoneycomb()) {
                     // Running on Honeycomb or newer, so wrap in a standard BitmapDrawable
