@@ -221,7 +221,7 @@ public abstract class ImageWorker {
 
         if (bitmapWorkerTask != null) {
             final Object bitmapData = bitmapWorkerTask.mData;
-            if (bitmapData == null || !bitmapData.equals(data)) {
+            if (bitmapData == null || !bitmapData.equals(data)) {//这个地方如果不这么判断的话，会出现闪动的情况哦。特此标注一下
                 bitmapWorkerTask.cancel(true);
                 if (BuildConfig.DEBUG) {
                     Log.d(TAG, "cancelPotentialWork - cancelled work for " + data);
